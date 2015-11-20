@@ -28,6 +28,7 @@ module Thyme
       @bar_length = 25
       @bar_format = '[%B] %t'
       @break_color = 'default'
+      @default_color = 'default'
       @interval = 1
       @timer = 25 * 60
       @timer_break = 5 * 60
