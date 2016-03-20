@@ -3,20 +3,37 @@ module Thyme
   # Public methods in this file are exposed to the thymerc file.
   class Config
     CONFIG_FILE = "#{ENV['HOME']}/.thymerc"
-    PID_FILE = "#{ENV['HOME']}/.thyme-pid"
-    TMUX_FILE = "#{ENV['HOME']}/.thyme-tmux"
-    OPTIONS = [:break_color, :interval, :timer, :timer_break, :tmux, :tmux_theme, :warning, :warning_color]
+    PID_FILE    = "#{ENV['HOME']}/.thyme-pid"
+    TMUX_FILE   = "#{ENV['HOME']}/.thyme-tmux"
+
+    OPTIONS = %i(
+      bar_length
+      bar_format
+      break_color
+      interval
+      timer
+      timer_break
+      tmux
+      tmux_theme
+      warning
+      warning_color
+    )
+
     OPTIONS.each { |opt| attr_reader(opt) }
+
     attr_accessor :break, :daemon, :repeat, :repeat_index
 
     def initialize
       # options set via config file
+      @bar_length = 25
+      @bar_format = '[%B] %t'
       @break_color = 'default'
       @interval = 1
       @timer = 25 * 60
       @timer_break = 5 * 60
       @tmux = false
-      @tmux_theme = "#[default]#[fg=%s]%s#[default]" 
+      @tmux_bar = false
+      @tmux_theme = "#[default]#[fg=%s]%s#[default]"
       @warning = 5 * 60
       @warning_color = 'red,bold'
 

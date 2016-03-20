@@ -53,8 +53,8 @@ module Thyme
         ProgressBar.create(
           title: @format.time_left(seconds_left-1, min_length),
           total: seconds_total,
-          length: 50,
-          format: '[%B] %t') : nil
+          length: @config.bar_length,
+          format: @config.bar_format) : nil
       @bar.reset if @bar
       while seconds_left > 0
         begin
@@ -73,7 +73,7 @@ module Thyme
               @bar.progress = seconds_passed
             end
           end
-          @tmux.tick(@format.tmux_color(seconds_left), title)
+          @tmux.tick(@format.tmux_color(seconds_left), title, @bar.to_s)
           unless started
             started = true
             @config.send_to_plugin(:before_all) if first?
