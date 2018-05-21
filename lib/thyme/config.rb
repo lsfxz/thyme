@@ -9,6 +9,7 @@ module Thyme
     OPTIONS = %i(
       bar_length
       bar_format
+      default_color
       break_color
       interval
       timer
