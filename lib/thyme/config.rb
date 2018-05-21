@@ -10,6 +10,7 @@ module Thyme
       bar_length
       bar_format
       default_color
+      tmux_bar
       break_color
       interval
       timer
